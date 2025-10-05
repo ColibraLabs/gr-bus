@@ -3,11 +3,12 @@ import pdfplumber
 import io
 import json
 from datetime import datetime
+import os
 
 # === CONFIGURACIÓN ===
 PDF_URL = "https://ctagr.es/wp-content/uploads/horarios/20250916/L111L.pdf"
 NOMBRE_LINEA = "L-111"
-PHP_ENDPOINT = "https://www.colibra.cloud/labs/grBus_test/receiver.php"  # <--- cámbialo por tu URL real
+PHP_ENDPOINT = os.getenv("PHP_ENDPOINT")
 
 # === ETAPA 1: Extraer tablas del PDF ===
 def extraer_tablas(pdf_url):
@@ -81,3 +82,4 @@ if __name__ == "__main__":
         enviar_a_bd(NOMBRE_LINEA, datos)
     else:
         print("No se pudieron extraer datos del PDF.")
+
